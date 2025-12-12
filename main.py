@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-AI Browser Agent - Main entry point
-Autonomous AI agent for web browser automation
+AI Browser Agent - Главная точка входа
+Автономный AI-агент для автоматизации веб-браузера
 """
 
 import asyncio
@@ -13,7 +13,7 @@ from cli import AgentCLI
 
 
 async def run_agent_from_args():
-    """Run agent with command line arguments"""
+    """Запустить агента с аргументами командной строки"""
     if len(sys.argv) < 2:
         return False
     
@@ -22,7 +22,7 @@ async def run_agent_from_args():
     api_key = os.getenv("ANTHROPIC_API_KEY")
     
     if not api_key:
-        print("Error: ANTHROPIC_API_KEY not set in .env file")
+        print("Ошибка: ANTHROPIC_API_KEY не установлен в .env файле")
         return False
     
     agent = AdvancedAIAgent(api_key)
@@ -30,19 +30,19 @@ async def run_agent_from_args():
     
     try:
         print(f"\n{'='*60}")
-        print(f"Task: {task}")
+        print(f"Задача: {task}")
         print(f"{'='*60}\n")
         
         result = await agent.execute_task(task)
         
         print(f"\n{'='*60}")
-        print(f"Result:\n{result}")
+        print(f"Результат:\n{result}")
         print(f"{'='*60}\n")
         
         return True
     
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Ошибка: {e}")
         return False
     
     finally:
@@ -50,17 +50,17 @@ async def run_agent_from_args():
 
 
 async def main():
-    """Main entry point"""
+    """Главная функция"""
     print("\n" + "="*60)
     print("AI Browser Agent")
     print("="*60)
     
-    # Check if task provided as argument
+    # Проверяем, передана ли задача как аргумент
     if len(sys.argv) > 1:
         success = await run_agent_from_args()
         sys.exit(0 if success else 1)
     
-    # Otherwise run interactive CLI
+    # Иначе запускаем интерактивный режим
     cli = AgentCLI()
     
     try:
@@ -68,10 +68,10 @@ async def main():
         await cli.run_interactive()
     
     except KeyboardInterrupt:
-        print("\n\nInterrupted by user")
+        print("\n\nПрервано пользователем")
     
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Ошибка: {e}")
     
     finally:
         await cli.close()

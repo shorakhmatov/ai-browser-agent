@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class AIAgent:
+    """Базовый AI агент для управления браузером"""
+    
     def __init__(self, api_key: str):
         self.client = Anthropic(api_key=api_key)
         self.browser = BrowserController()
@@ -18,9 +20,11 @@ class AIAgent:
         self.destructive_actions = {"submit", "delete", "remove", "pay", "checkout", "purchase"}
 
     async def initialize(self):
+        """Инициализировать агента"""
         await self.browser.launch()
 
     async def close(self):
+        """Закрыть агента"""
         await self.browser.close()
 
     def _compress_content(self, content: str, max_length: int = 3000) -> str:

@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 class AdvancedAIAgent:
+    """Продвинутый AI агент с улучшенной обработкой ошибок и контекста"""
+    
     def __init__(self, api_key: str):
         self.client = Anthropic(api_key=api_key)
         self.browser = BrowserController()
@@ -28,10 +30,12 @@ class AdvancedAIAgent:
         }
 
     async def initialize(self):
+        """Инициализировать продвинутого агента"""
         await self.browser.launch()
-        logger.info("Advanced Agent initialized")
+        logger.info("Продвинутый агент инициализирован")
 
     async def close(self):
+        """Закрыть продвинутого агента"""
         await self.browser.close()
 
     async def _get_page_state(self) -> Dict[str, Any]:
